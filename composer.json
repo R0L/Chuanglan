@@ -9,12 +9,9 @@
             "email": "2080775740@qq.com"
         }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "version":"1.0.0",
     "require": {
         "php": ">=5.4.0"
-    },
-    "require-dev": {
     },
     "autoload": {
         "psr-4": {
