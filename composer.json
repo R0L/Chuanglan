@@ -1,0 +1,29 @@
+{
+    "name": "rol/chuanglan",
+    "type": "library",
+    "description": "This is a chuanglan from thinkphp5",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "ROL",
+            "email": "2080775740@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "ROL\\Chuanglan\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ROL\\Chuanglan\\": "tests/"
+        }
+    }
+}
