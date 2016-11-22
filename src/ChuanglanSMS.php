@@ -39,9 +39,11 @@ Class ChuanglanSMS {
         $result = $clapi->sendSMS("{$phone}", "【{$this->appName}】您好，您的验证码是{$code}", "false");
         $result = $clapi->execResult($result);
         if (isset($result[1]) && $result[1] == 0) {
-            echo '{"status":true,"info":"发送成功"}';
+            //echo '{"status":true,"info":"发送成功"}';
+            return true;
         } else {
-            echo '{"status":false,"info":"发送失败' . $result[1] . '"}';
+            //echo '{"status":false,"info":"发送失败' . $result[1] . '"}';
+            return false;
         }
     }
 
@@ -55,9 +57,11 @@ Class ChuanglanSMS {
         $result = $clapi->sendSMS("{$phone}", "【{$this->appName}】您好，您的验证码是{$code}", "false");
         $result = $clapi->execResult($result);
         if (isset($result[1]) && $result[1] == 0) {
-            echo '{"status":true,"info":"发送成功"}';
+            //echo '{"status":true,"info":"发送成功"}';
+            return true;
         } else {
-            echo '{"status":false,"info":"发送失败' . $result[1] . '"}';
+            //echo '{"status":false,"info":"发送失败' . $result[1] . '"}';
+            return faslse;
         }
     }
 
