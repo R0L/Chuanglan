@@ -19,9 +19,9 @@ class ChuanglanVoiceApi {
 	//创蓝短信余额查询接口URL, 如无必要，该参数可不用修改
 	const API_BALANCE_QUERY_URL='http://sms.253.com/msg/QueryBalance';
 
-	const API_ACCOUNT='V8402562';//创蓝账号 替换成你自己的账号
+	const API_ACCOUNT='';//创蓝账号 替换成你自己的账号
 
-	const API_PASSWORD='pdUncvO58he781';//创蓝密码 替换成你自己的密码
+	const API_PASSWORD='';//创蓝密码 替换成你自己的密码
 
 	/**
 	 * 发送短信
