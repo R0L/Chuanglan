@@ -1,56 +1,75 @@
 <?php
 namespace ROL\Chuanglan\ChuanglanSmsHelper;
-header("Content-type:text/html; charset=UTF-8");
-/* *
- * 类名：ChuanglanSmsApi
- * 功能：创蓝接口请求类
- * 详细：构造创蓝短信接口请求，获取远程HTTP数据
- * 版本：1.3
- * 日期：2016-07-16
+
+/**
+ * 创蓝短信接口
+ * Class ChuanglanSmsApi
+ * @package ROL\Chuanglan\ChuanglanSmsHelper
  */
 class ChuanglanSmsApi {
 
-    //创蓝发送短信接口URL, 如无必要，该参数可不用修改
-    const API_SEND_URL = 'http://sms.253.com/msg/HttpBatchSendSM';
-    //创蓝短信余额查询接口URL, 如无必要，该参数可不用修改
-    const API_BALANCE_QUERY_URL = 'http://sms.253.com/msg/QueryBalance';
-    const API_ACCOUNT = ''; //创蓝账号 替换成你自己的账号
-    const API_PASSWORD = ''; //创蓝密码 替换成你自己的密码
+
+    private $apiSendUrl = 'http://sms.253.com/msg/HttpBatchSendSM';//创蓝发送短信接口URL
+    private $apiBalanceQueryUrl = 'http://sms.253.com/msg/QueryBalance'; //创蓝短信余额查询接口URL
+    private $apiAccount = ''; //创蓝账号
+    private $apiPassword = ''; //创蓝密码
+
+
+    /**
+     * 构造函数
+     * @param $apiAccount
+     * @param $apiPassword
+     */
+    public function __construct($apiAccount,$apiPassword){
+        $this->apiAccount = $apiAccount;
+        $this->apiPassword = $apiPassword;
+    }
+
+
+    /**
+     * 设置帐号密码
+     * @param $apiAccount
+     * @param $apiPassword
+     */
+    public function setConfig($apiAccount,$apiPassword){
+        $this->apiAccount = $apiAccount;
+        $this->apiPassword = $apiPassword;
+    }
+
 
     /**
      * 发送短信
-     *
-     * @param string $mobile 		手机号码
-     * @param string $msg 			短信内容
-     * @param string $needstatus 	是否需要状态报告
+     * @param $mobile   手机号码
+     * @param $msg  短信内容
+     * @param string $needstatus    是否需要状态报告
+     * @return mixed
      */
     public function sendSMS($mobile, $msg, $needstatus = 'false') {
 
         //创蓝接口参数
         $postArr = array(
-            'account' => self::API_ACCOUNT,
-            'pswd' => self::API_PASSWORD,
+            'account' => $this->apiAccount,
+            'pswd' => $this->apiPassword,
             'msg' => $msg,
             'mobile' => $mobile,
             'needstatus' => $needstatus
         );
-        $result = $this->curlPost(self::API_SEND_URL, $postArr);
+        $result = $this->curlPost($this->apiSendUrl, $postArr);
         return $result;
     }
 
     /**
      * 查询额度
-     *
-     *  查询地址
+     * 查询地址
      */
     public function queryBalance() {
 
     //查询参数
         $postArr = array(
-            'account' => self::API_ACCOUNT,
-            'pswd' => self::API_PASSWORD,
+            'account' => $this->apiAccount,
+            'pswd' => $this->apiPassword,
         );
-        $result = $this->curlPost(self::API_BALANCE_QUERY_URL, $postArr);
+        $result = $this->curlPost($this->apiBalanceQueryUrl, $postArr);
         return $result;
     }
 

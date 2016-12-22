@@ -10,15 +10,20 @@ use ROL\Chuanglan\ChuanglanSmsHelper\ChuanglanVoiceApi;
  */
 Class ChuanglanSMS {
 
-    //签名
-    private $appName = null;
+    private $appName = null;//签名
+    private $apiAccount = ''; //创蓝账号
+    private $apiPassword = ''; //创蓝密码
 
     /**
      * 初始化
      * @param type $appName
+     * @param type $apiAccount
+     * @param type $apiPassword
      */
-    function __construct($appName = null) {
+    public function __construct($appName,$apiAccount,$apiPassword) {
         $this->appName = $appName;
+        $this->apiAccount = $apiAccount;
+        $this->apiPassword = $apiPassword;
     }
 
     /**
@@ -29,20 +34,31 @@ Class ChuanglanSMS {
         $this->appName = $appName;
     }
 
+
+    /**
+     * 设置帐号密码
+     * @param $apiAccount
+     * @param $apiPassword
+     */
+    public function setConfig($apiAccount,$apiPassword){
+        $this->apiAccount = $apiAccount;
+        $this->apiPassword = $apiPassword;
+    }
+
+
     /**
      * 发送文本短信消息
-     * @param type $phone 电话号码
-     * @param type $code 短信验证码
+     * @param $phone 电话号码
+     * @param $code 短信验证码
+     * @return bool
      */
     public function sendSms($phone, $code) {
-        $clapi = new ChuanglanSmsApi();
+        $clapi = new ChuanglanSmsApi($this->apiAccount,$this->apiPassword);
         $result = $clapi->sendSMS("{$phone}", "【{$this->appName}】您好，您的验证码是{$code}", "false");
         $result = $clapi->execResult($result);
         if (isset($result[1]) && $result[1] == 0) {
-            //echo '{"status":true,"info":"发送成功"}';
             return true;
         } else {
-            //echo '{"status":false,"info":"发送失败' . $result[1] . '"}';
             return false;
         }
     }
@@ -51,16 +67,15 @@ Class ChuanglanSMS {
      * 发送语音短信消息
      * @param type $phone 电话号码
      * @param type $code 短信验证码
+     * @return bool
      */
     public function sendVoice($phone, $code) {
-        $clapi = new ChuanglanVoiceApi();
+        $clapi = new ChuanglanVoiceApi($this->apiAccount,$this->apiPassword);
         $result = $clapi->sendSMS("{$phone}", "【{$this->appName}】您好，您的验证码是{$code}", "false");
         $result = $clapi->execResult($result);
         if (isset($result[1]) && $result[1] == 0) {
-            //echo '{"status":true,"info":"发送成功"}';
             return true;
         } else {
-            //echo '{"status":false,"info":"发送失败' . $result[1] . '"}';
             return faslse;
         }
     }
